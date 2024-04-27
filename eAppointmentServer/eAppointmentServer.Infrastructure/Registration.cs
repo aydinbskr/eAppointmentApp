@@ -1,7 +1,9 @@
-﻿using eAppointmentServer.Domain.Entities;
+﻿using eAppointmentServer.Application.Services;
+using eAppointmentServer.Domain.Entities;
 using eAppointmentServer.Domain.Repositories;
 using eAppointmentServer.Infrastructure.Context;
 using eAppointmentServer.Infrastructure.Repositories;
+using eAppointmentServer.Infrastructure.Services;
 using GenericRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +36,8 @@ namespace eAppointmentServer.Infrastructure
             services.AddScoped<IDoctorRepository, DoctorRepository>();
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<IUnitOfWork>(srv => srv.GetRequiredService<ApplicationDbContext>());
+
+            services.AddScoped<IJWTProvider, JwtProvider>();
 
             return services;
         }
