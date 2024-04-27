@@ -7,12 +7,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace eAppointmentServer.Infrastructure.Context
 {
-    internal sealed class ApplicationDbContext:IdentityDbContext<AppUser,AppRole,Guid>,IUnitOfWork
+    internal sealed class ApplicationDbContext:IdentityDbContext<
+        AppUser,
+        AppRole,
+        Guid,
+        IdentityUserClaim<Guid>,
+        AppUserRole,
+        IdentityUserLogin<Guid>,
+        IdentityRoleClaim<Guid>,
+        IdentityUserToken<Guid>>,IUnitOfWork
     {
         public ApplicationDbContext(DbContextOptions options):base(options)
         {
@@ -31,6 +40,7 @@ namespace eAppointmentServer.Infrastructure.Context
             builder.Ignore<IdentityUserToken<Guid>>();
 
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
         }
     }
 }

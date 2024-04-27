@@ -26,7 +26,7 @@ namespace eAppointmentServer.Infrastructure.Services
             DateTime expires = DateTime.Now.AddDays(1);
 
             SymmetricSecurityKey securityKey = new(Encoding.UTF8.GetBytes("This is very long my security key"));
-            SigningCredentials signingCredentials = new(securityKey, SecurityAlgorithms.HmacSha512);
+            SigningCredentials signingCredentials = new(securityKey, SecurityAlgorithms.HmacSha256);
 
             JwtSecurityToken securityToken = new(
                 issuer: "Aydın BAŞKARA",

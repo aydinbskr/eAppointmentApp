@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace eAppointmentServer.Domain.Entities
 {
-    public sealed class AppUserRole:IdentityUserRole<Guid>
+    public sealed class AppUserRole : IdentityUserRole<Guid>
     {
     }
 }
