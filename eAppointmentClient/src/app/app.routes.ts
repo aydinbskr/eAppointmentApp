@@ -3,6 +3,9 @@ import { LoginComponent } from './components/login/login.component';
 import { LayoutsComponent } from './components/layouts/layouts.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AuthService } from './services/auth.service';
+import { inject } from '@angular/core';
+import { DoctorsComponent } from './components/doctors/doctors.component';
 
 export const routes: Routes = [
     {
@@ -12,10 +15,15 @@ export const routes: Routes = [
     {
         path:"",
         component:LayoutsComponent,
+        canActivateChild: [()=> inject(AuthService).isAuthenticated()],
         children:[
             {
                 path:"",
                 component:HomeComponent
+            },
+            {
+                path:"doctors",
+                component:DoctorsComponent
             }
         ]
     },
