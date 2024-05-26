@@ -30,11 +30,11 @@ export class HttpService {
         callBack(res);      
       }),
       error: ((err:HttpErrorResponse)=> {
-        // this.error.errorHandler(err);
+        this.error.errorHandler(err);
 
-        // if(errCallBack !== undefined){                    
-        //   errCallBack(err);
-        // }        
+        if(errCallBack !== undefined){                    
+          errCallBack(err);
+        }        
       })
     })
   }

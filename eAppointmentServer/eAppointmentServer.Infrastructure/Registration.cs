@@ -35,9 +35,13 @@ namespace eAppointmentServer.Infrastructure
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
             services.AddScoped<IDoctorRepository, DoctorRepository>();
             services.AddScoped<IPatientRepository, PatientRepository>();
+            services.AddScoped<IUserRoleRepository, UserRoleRepository>();
+
+            services.AddScoped<IJwtProvider, JwtProvider>();
+
             services.AddScoped<IUnitOfWork>(srv => srv.GetRequiredService<ApplicationDbContext>());
 
-            services.AddScoped<IJWTProvider, JwtProvider>();
+            
 
             return services;
         }

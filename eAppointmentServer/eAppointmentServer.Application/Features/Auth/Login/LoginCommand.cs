@@ -17,7 +17,7 @@ namespace eAppointmentServer.Application.Features.Auth.Login
 
     public sealed record LoginCommandResponse(string Token);
 
-    public sealed class LoginCommandHandler(UserManager<AppUser> userManager,IJWTProvider jwtProvider) : IRequestHandler<LoginCommand, Result<LoginCommandResponse>>
+    public sealed class LoginCommandHandler(UserManager<AppUser> userManager,IJwtProvider jwtProvider) : IRequestHandler<LoginCommand, Result<LoginCommandResponse>>
     {
         public async Task<Result<LoginCommandResponse>> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
@@ -36,7 +36,7 @@ namespace eAppointmentServer.Application.Features.Auth.Login
                 return Result<LoginCommandResponse>.Failure("Password is wrong");
             }
 
-            string token = jwtProvider.CreateToken(appUser);
+            string token = await jwtProvider.CreateTokenAsync(appUser);
 
 
             return Result<LoginCommandResponse>.Succeed(new LoginCommandResponse(token));
